@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart' // new
         PhoneAuthProvider;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gtk_flutter/yes_no_selection.dart';
 import 'package:provider/provider.dart';
 
 import 'app_state.dart';
@@ -51,11 +52,31 @@ class HomePage extends StatelessWidget {
           ),
           const Header('Discussion'),
           Consumer<ApplicationState>(
-              builder: (context, appState, _) => GuestBook(
-                    addMessaage: (message) =>
-                        appState.addMessageToGuestBook(message),
-                    messages: appState.guestBookMessage,
-                  ))
+              builder: (context, appState, _) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        switch (appState.attendees) {
+                          1 => const Paragraph('1 person going'),
+                          >= 2 =>
+                            Paragraph('${appState.attendees} people going'),
+                          _ => const Paragraph('No one going'),
+                        },
+                        // ...to here.
+                        if (appState.loggedIn) ...[
+                          // Add from here...
+                          YesNoSelection(
+                            state: appState.attending,
+                            onSelection: (attending) =>
+                                appState.attending = attending,
+                          ),
+                          // ...to here.
+                          GuestBook(
+                            addMessaage: (message) =>
+                                appState.addMessageToGuestBook(message),
+                            messages: appState.guestBookMessage,
+                          ),
+                        ],
+                      ]))
         ],
       ),
     );

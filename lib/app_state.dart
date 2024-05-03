@@ -27,6 +27,7 @@ class ApplicationState extends ChangeNotifier {
   int get attendees => _attendees;
 
   Attending _attending = Attending.unknown;
+  
   StreamSubscription<DocumentSnapshot>? _attendingSubscription;
   Attending get attending => _attending;
 
