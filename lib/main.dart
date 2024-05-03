@@ -5,7 +5,6 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gtk_flutter/app_state.dart';
 import 'package:provider/provider.dart';
 
@@ -56,9 +55,7 @@ class App extends StatelessWidget {
               highlightColor: Colors.deepPurple,
             ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        textTheme: GoogleFonts.robotoTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
       ),
